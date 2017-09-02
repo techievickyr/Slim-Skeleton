@@ -1,0 +1,32 @@
+{
+    "name": "techievickyr/slim-skeleton",
+    "description": "Slim Framework 3 Skeleton with Medoo & JWT Authentication",
+    "keywords": ["slim-framework", "skeleton", "slim3"],
+    "homepage": "https://github.com/techievickyr/slim-skeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vicky R",
+            "email": "techievickyr@gmail.com",
+            "homepage": "https://techievickyr.blogspot.in/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+			"App\\": "app/src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "slim/php-view": "^2.0",
+        "monolog/monolog": "^1.17"
+    },
+    "require-dev": {
+        "tuupola/slim-jwt-auth": "^2.3",
+        "catfan/Medoo": "^1.4"
+	},
+    "scripts": {
+        "start": "php -S 0.0.0.0:8080 -t public public/index.php"
+    }
+}
