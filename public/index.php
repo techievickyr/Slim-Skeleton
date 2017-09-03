@@ -1,17 +1,5 @@
 <?php
 
-// Define application environment
-defined('ENVIRONMENT')
-    || define('ENVIRONMENT', (getenv('ENVIRONMENT') ? getenv('ENVIRONMENT') : 'development')); // Value is "production|testing|development"
-
-/**
-  * Display all errors when APPLICATION_ENV is testing|development.
-  */
-if (ENVIRONMENT === 'testing' || ENVIRONMENT === 'development') {
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
-}
-
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
     // something which should probably be served as a static file
@@ -25,6 +13,22 @@ if (PHP_SAPI == 'cli-server') {
 require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
+
+//Loads environment variables from .env to getenv(), $_ENV and $_SERVER automagically.
+$dotenv = new \Dotenv\Dotenv(__DIR__ . '/../');
+$lines = $dotenv->load();
+
+// Define application environment
+defined('ENVIRONMENT')
+    || define('ENVIRONMENT', (getenv('ENVIRONMENT') ? getenv('ENVIRONMENT') : 'production')); // Value is "production|testing|development"
+
+/**
+ * Display all errors when APPLICATION_ENV is testing|development.
+ */
+if (ENVIRONMENT === 'testing' || ENVIRONMENT === 'development') {
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+}
 
 // Instantiate the app
 $settings = require __DIR__ . '/../config/settings.php';
